@@ -1,30 +1,57 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 
 class App extends Component{
-  
+  constructor(props){
+    super(props);
+    this.state = {
+      nome: '',
+    }
+
+    this.pegaNome = this.pegaNome.bind(this)
+  }
+
+  pegaNome(text){
+    if(text.length > 0){
+      this.setState({nome: 'Bem vindo ' + text})
+    }
+    else{
+      this.setState({nome: ''})
+    }
+  }
+
+
   render(){
     return(
-      <View style={[styles.area]}>
-        <Text style={[styles.mainText, styles.alinhaTexto]}>Texto 1</Text>
-        <Text>Texto 2</Text>
-        <Text>Texto 3</Text>
-        <Text>Texto 4</Text>
+      <View style={{}}>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite seu nome"
+          onChangeText={(e) => this.pegaNome(e)}
+        />
+
+        <Text style={styles.texto}>{this.state.nome}</Text>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  area:{
-    marginTop: 40
+
+const styles= StyleSheet.create({
+  container:{
+    flex:1
   },
-  mainText:{
-    fontSize: 25,
-    color: '#FF0000'
+  input:{
+    height: 45,
+    borderWidth: 1,
+    borderColor: 'blue',
+    margin: 10,
+    fontSize: 20,
+    padding: 10
   },
-  alinhaTexto:{
-    textAlign: 'center'
+  texto:{
+    textAlign: 'center',
+    fontSize: 25
   }
 })
 
